@@ -1,0 +1,111 @@
+<template>
+  <div>
+    <base-component>
+      <template #header>
+        <div class="input">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="icon icon-tabler icon-tabler-search"
+            width="56"
+            height="56"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <circle cx="10" cy="10" r="7" />
+            <line x1="21" y1="21" x2="15" y2="15" />
+          </svg>
+          <form @submit.prevent="submitForm">
+            <input type="text" v-model="search" placeholder="Search for photo" />
+          </form>
+        </div>
+      </template>
+
+      <template #body>
+        <div class="inner_images">
+          <template v-if="images.length > 0">
+            <div v-for="(items, index) in grid" :key="index">
+              <div class="image" v-for="image in items" :key="image.id">
+                <img :src="image.urls.regular" :alt="image.alt_description" />
+                <div class="text">
+                  <div class="name">{{image.user.name}}</div>
+                  <div class="location">{{image.user.location}}</div>
+                </div>
+              </div>
+            </div>
+          </template>
+          <template v-else>
+            <div>
+              <place-holder></place-holder>
+              <place-holder></place-holder>
+              <place-holder></place-holder>
+            </div>
+            <div>
+              <place-holder></place-holder>
+              <place-holder></place-holder>
+              <place-holder></place-holder>
+            </div>
+            <div>
+              <place-holder></place-holder>
+              <place-holder></place-holder>
+              <place-holder></place-holder>
+            </div>
+          </template>
+        </div>
+      </template>
+    </base-component>
+  </div>
+</template>
+
+<script>
+import axios from "axios";
+import BaseComponent from "@/components/Base";
+import PlaceholderComponent from "@/components/PlaceholderComponent";
+import grid from "@/mixins/grid";
+export default {
+  mixins: [grid],
+  components: {
+    "base-component": BaseComponent,
+    "place-holder": PlaceholderComponent,
+  },
+  data() {
+    return {
+      search: "",
+      images: [],
+    };
+  },
+  methods: {
+    getPhotos() {
+      axios
+        .get("/search/photos?page=1&query=african")
+        .then(({ data }) => {
+          this.images = data.results;
+          console.log(
+            data.results,
+            this.chunkArray(
+              this.images,
+              Math.ceil(this.images.length / this.size)
+            )
+          );
+        })
+        .catch((error) => console.log(error));
+    },
+    submitForm() {
+      if (this.search != "") {
+        this.$router.push({ path: "/search", query: { query: this.search } });
+      }
+      return false;
+    },
+  },
+  created() {
+    this.getPhotos();
+  },
+};
+</script>
+
+<style>
+</style>

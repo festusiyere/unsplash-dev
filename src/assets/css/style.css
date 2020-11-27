@@ -1,0 +1,338 @@
+/* Import Source Sans Pro font from Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600&display=swap");
+
+/* Import Variables */
+@import url("variables.css");
+@import url("animation.css");
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Calibri", "Source Sans Pro", sans-serif;
+  box-shadow: border-box;
+  background-color: var(--bg-white);
+  color: var(--text-primary-light);
+}
+
+.first_section {
+  background-color: var(--bg-primary);
+  padding: 8rem 8vw;
+  width: 100%;
+}
+
+.first_section .input_container {
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+}
+
+.first_section .input_container .input {
+  width: 100%;
+  position: relative;
+}
+
+.first_section .input_container .input input {
+  width: 100%;
+  border: none;
+  border-radius: 0.4em;
+  padding: 1.7rem 4.2rem;
+  font-family: inherit;
+  font-size: 1.2rem;
+  box-shadow: 0 0 20px 7px var(--shadow-input);
+}
+
+.first_section .input_container .input input:focus {
+  outline: none;
+}
+
+.first_section .input_container .input input::placeholder {
+  color: var(--text-primary-lighter);
+}
+
+.first_section .input_container .input svg {
+  position: absolute;
+  left: 1.5rem;
+  top: 50%;
+  width: 1.2rem;
+  height: 1.2rem;
+  transform: translateY(-50%);
+}
+
+.first_section .input_container .result {
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.first_section .input_container .result q {
+  font-family: "Source Sans Pro";
+  color: var(--text-secondary-lighter);
+}
+
+.second_section {
+  margin-top: -3rem;
+  padding: 0rem 12vw 4rem;
+  width: 100%;
+}
+
+.second_section .images_container {
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 2rem;
+  width: 100%;
+}
+
+.second_section .images_container .inner_images {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3.5vw;
+}
+
+.inner_images .image {
+  display: block;
+  position: relative;
+  border-radius: 0.4rem;
+  margin-bottom: 2rem;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.inner_images .image img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.inner_images .image .text {
+  position: absolute;
+  padding: 2rem 1.5rem 1.5rem;
+  bottom: 0;
+  width: 100%;
+  color: var(--text-secondary-light);
+  background-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0),
+    rgba(0, 0, 0, 0.76)
+  );
+  background-image: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.9) 0%,
+    transparent 100%
+  );
+}
+
+.inner_images .image .name {
+  font-size: 1.3rem;
+  line-height: 1.5;
+}
+
+.inner_images .image .location {
+  font-size: 0.8rem;
+  line-height: 1;
+}
+
+.placeholder {
+  width: 100%;
+  min-height: 300px;
+  display: block;
+  background-color: var(--bg-grey-lighter);
+  position: relative;
+  border-radius: 0.4rem;
+  margin-bottom: 2rem;
+  overflow: hidden;
+}
+
+.placeholder .text {
+  position: absolute;
+  padding: 2rem 1.5rem 1.5rem;
+  bottom: 0;
+  width: 100%;
+}
+
+.placeholder .text .name {
+  width: 50%;
+  height: 1.2rem;
+  border-radius: 1px;
+  margin-bottom: 0.4rem;
+  background-color: var(--bg-grey);
+}
+
+.placeholder .text .location {
+  width: 30%;
+  border-radius: 1px;
+  height: 1rem;
+  background-color: var(--bg-grey);
+}
+
+.placeholder::before {
+  content: " ";
+  position: absolute;
+  background: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0) 40%,
+      rgba(255, 255, 255, 0.35) 50%,
+      rgba(255, 255, 255, 0) 54%
+    )
+    50% 50%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 50%;
+  z-index: 1;
+  width: 500%;
+  transform: rotate(-60deg);
+  margin-left: -250%;
+  -webkit-animation: phAnimation 1s ease-in infinite;
+  animation: phAnimation 1s ease-in infinite;
+}
+
+.modal-container {
+  position: relative;
+  z-index: 0;
+  display: none;
+}
+
+.modal {
+  z-index: 999;
+  position: fixed;
+  inset: 0px;
+  pointer-events: auto;
+  cursor: zoom-out;
+  transform: translateY(0px);
+  background: var(--bg-dark) none repeat scroll 0% 0%;
+  padding: 2rem 0;
+  max-height: 100vh;
+}
+
+/* .modal .overlay {
+  position: absolute;
+  inset: 0px;
+  background: var(--bg-dark) none repeat scroll 0% 0%;
+  opacity: 0.8;
+}
+ */
+.modal button {
+  background: none;
+  border: none;
+  color: var(--bg-grey-lighter);
+  position: absolute;
+  right: 20px;
+  top: 20px;
+}
+
+.modal .inner-modal {
+  /* position: absolute; */
+  /* height: calc(100vh - 10vh); */
+  height: 100%;
+  width: min-content;
+}
+
+.modal .inner-modal .modal-image {
+  width: min-content;
+  height: 100%;
+}
+
+.modal .inner-modal .modal-image img {
+  height: 100%;
+  width: auto;
+}
+
+.modal .inner-modal .modal-text {
+  padding: 1rem 2rem 2rem;
+  width: min-content;
+  background-color: var(--bg-white);
+}
+
+.modal .inner-modal .modal-text .name {
+  font-size: 1.5rem;
+  line-height: 1.5;
+  color: var(--text-primary);
+}
+
+.modal .inner-modal .modal-text .location {
+  font-size: 1rem;
+  line-height: 1;
+  color: var(--text-primary-lighter);
+}
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+  html {
+    font-size: 14px;
+  }
+
+  .first_section {
+    padding: 6rem 5vw;
+  }
+
+  .first_section .input_container .input input {
+    padding: 1.3rem 3.3rem;
+  }
+
+  .first_section .input_container .input svg {
+    left: 1.3rem;
+  }
+
+  .first_section .input_container .result {
+    font-size: 2.5rem;
+  }
+
+  .second_section {
+    padding: 0rem 5vw 4rem;
+  }
+
+  .second_section .images_container .inner_images {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6.5vw;
+  }
+}
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-device-width: 320px) and (max-device-width: 767px) {
+  html {
+    font-size: 14px;
+  }
+
+  .first_section {
+    padding: 6rem 5vw;
+  }
+
+  .first_section .input_container .input input {
+    padding: 1.1rem 3.3rem;
+  }
+
+  .first_section .input_container .input svg {
+    left: 1.1rem;
+  }
+
+  .first_section .input_container .result {
+    font-size: 2rem;
+  }
+
+  .second_section {
+    padding: 0rem 0vw 4rem;
+  }
+
+  .second_section .images_container .inner_images {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 6.5vw;
+  }
+}
+
+/* Large screens ----------- */
+@media only screen and (min-width: 1824px) {
+  html {
+    font-size: 18px;
+  }
+}
+

@@ -1,0 +1,19 @@
+@-webkit-keyframes phAnimation {
+    0% {
+      transform: translate3d(-30%, 0, 0);
+    }
+    100% {
+      transform: translate3d(30%, 0, 0);
+    }
+  }
+  
+  @keyframes phAnimation {
+    0% {
+      transform: translate3d(-30%, 0, 0);
+    }
+    100% {
+      transform: translate3d(30%, 0, 0);
+    }
+  }
+  
+  

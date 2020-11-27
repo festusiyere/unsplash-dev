@@ -1,0 +1,18 @@
+:root {
+  /* Text Colors */
+  --text-primary: #253858;
+  --text-primary-light: #314361;
+  --text-primary-lighter: #41526e;
+  --text-secondary: #6d7b91;
+  --text-secondary-light: #DAD5D4;
+  --text-secondary-lighter: #6D7B91;
+
+  /* Background Colors */
+  --bg-primary: #dde2e9;
+  --bg-white: #fff;
+  --bg-grey: #e6e6e6;
+  --bg-grey-lighter: #f5f5f5;
+
+  /* Shadows */
+  --shadow-input: rgba(49, 67, 97, 0.051);
+}
