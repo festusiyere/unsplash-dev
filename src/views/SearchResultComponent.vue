@@ -3,7 +3,7 @@
     <base-component>
       <template #header>
         <div class="result">
-          Search Results for
+          {{status}} for
           <q>{{searchParam}}</q>
         </div>
       </template>
@@ -12,7 +12,7 @@
         <div class="inner_images">
           <template v-if="images.length > 0">
             <div v-for="(items, index) in grid" :key="index">
-              <div class="image" v-for="image in items" :key="image.id">
+              <div class="image" v-for="image in items" :key="image.id" @click="setImage(image)">
                 <img :src="image.urls.regular" :alt="image.alt_description" />
                 <div class="text">
                   <div class="name">{{image.user.name}}</div>
@@ -31,23 +31,30 @@
         </div>
       </template>
     </base-component>
+    <transition mode="out-in" name="fade">
+      <modal @closeModal="toggleModal" :image="image" v-if="isOpen" />
+    </transition>
   </div>
 </template>
 
 <script>
 import axios from "axios";
 import BaseComponent from "@/components/Base";
+import ModalComponent from "@/components/ModalComponent";
 import PlaceholderComponent from "@/components/PlaceholderComponent";
 import grid from "@/mixins/grid";
+import modal from "@/mixins/modal";
 export default {
-  mixins: [grid],
+  mixins: [grid, modal],
   components: {
     "base-component": BaseComponent,
     "place-holder": PlaceholderComponent,
+    modal: ModalComponent,
   },
   data() {
     return {
       searchParam: "",
+      status: "Searching",
       images: [],
     };
   },
@@ -57,6 +64,7 @@ export default {
         .get("/search/photos?page=1&query=" + param)
         .then(({ data }) => {
           this.images = data.results;
+          this.status = "Search Results";
           console.log(
             data.results,
             this.chunkArray(

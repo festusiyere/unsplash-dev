@@ -14,9 +14,14 @@ const grid = {
     },
     methods: {
         chunkArray(arr, size) {
-            return arr.length > size
-                ? [arr.slice(0, size), ...this.chunkArray(arr.slice(size), size)]
-                : [arr];
+            // return arr.length > size
+            //     ? [arr.slice(0, size), ...this.chunkArray(arr.slice(size), size)]
+            //     : [arr];
+            if(arr.length > size ){
+                return [arr.slice(0, size), ...this.chunkArray(arr.slice(size), size)]
+            } else {
+                return [arr]
+            }
         },
     },
     created(){

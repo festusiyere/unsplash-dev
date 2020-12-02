@@ -29,7 +29,7 @@
         <div class="inner_images">
           <template v-if="images.length > 0">
             <div v-for="(items, index) in grid" :key="index">
-              <div class="image" v-for="image in items" :key="image.id">
+              <div class="image" v-for="image in items" @click="setImage(image)" :key="image.id">
                 <img :src="image.urls.regular" :alt="image.alt_description" />
                 <div class="text">
                   <div class="name">{{image.user.name}}</div>
@@ -39,17 +39,7 @@
             </div>
           </template>
           <template v-else>
-            <div>
-              <place-holder></place-holder>
-              <place-holder></place-holder>
-              <place-holder></place-holder>
-            </div>
-            <div>
-              <place-holder></place-holder>
-              <place-holder></place-holder>
-              <place-holder></place-holder>
-            </div>
-            <div>
+            <div v-for="n in size" :key="n">
               <place-holder></place-holder>
               <place-holder></place-holder>
               <place-holder></place-holder>
@@ -58,24 +48,31 @@
         </div>
       </template>
     </base-component>
+    <transition mode="out-in" name="fade">
+      <modal @closeModal="toggleModal" :image="image" v-if="isOpen" />
+    </transition>
   </div>
 </template>
 
 <script>
 import axios from "axios";
 import BaseComponent from "@/components/Base";
+import ModalComponent from "@/components/ModalComponent";
 import PlaceholderComponent from "@/components/PlaceholderComponent";
 import grid from "@/mixins/grid";
+import modal from "@/mixins/modal";
 export default {
-  mixins: [grid],
+  mixins: [grid, modal],
   components: {
     "base-component": BaseComponent,
     "place-holder": PlaceholderComponent,
+    modal: ModalComponent,
   },
   data() {
     return {
       search: "",
       images: [],
+      image: null,
     };
   },
   methods: {
