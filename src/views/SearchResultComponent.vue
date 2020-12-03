@@ -69,7 +69,7 @@ export default {
             data.results,
             this.chunkArray(
               this.images,
-              Math.floor(this.images.length / this.size)
+              this.size
             )
           );
         })

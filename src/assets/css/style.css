@@ -200,7 +200,6 @@ body {
 .modal {
   z-index: 20;
   position: fixed;
-  cursor: zoom-out;
   left: 0;
   top: 0;
   display: flex;
@@ -235,6 +234,7 @@ body {
 
 .modal .inner-modal .modal-image img {
   display: block;
+  cursor: zoom-out;
 }
 
 .modal .inner-modal .modal-text {

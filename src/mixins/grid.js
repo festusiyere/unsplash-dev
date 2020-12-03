@@ -3,7 +3,7 @@ const grid = {
         grid() {
             return this.chunkArray(
                 this.images,
-                Math.ceil(this.images.length / this.size)
+                this.size
             );
         },
     },
@@ -14,23 +14,39 @@ const grid = {
     },
     methods: {
         chunkArray(arr, size) {
-            // return arr.length > size
-            //     ? [arr.slice(0, size), ...this.chunkArray(arr.slice(size), size)]
-            //     : [arr];
-            if(arr.length > size ){
-                return [arr.slice(0, size), ...this.chunkArray(arr.slice(size), size)]
-            } else {
-                return [arr]
+            let result = new Array(size);
+
+            let div = (arr.length / size) | 0;
+
+            let remainder = arr.length % size;
+
+            let addOne;
+
+            for (let i = 0; i < size; ++i) {
+                addOne = remainder > 0 ? 1 : 0;
+                result[i] = new Array(div + addOne);
+                --remainder;
             }
+
+            let index = 0;
+
+            result.forEach((elem) => {
+                for (let i = 0; i < elem.length; ++i) {
+                    elem[i] = arr[index];
+                    ++index;
+                }
+            })
+
+            return result;
         },
     },
-    created(){
+    created() {
         console.log("I am working Fine");
     },
-    beforeDestroy(){
+    beforeDestroy() {
         console.log("I am getting Destroyed");
     }
-    
+
 }
 
 export default grid;

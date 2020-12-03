@@ -85,7 +85,7 @@ export default {
             data.results,
             this.chunkArray(
               this.images,
-              Math.ceil(this.images.length / this.size)
+              this.size
             )
           );
         })

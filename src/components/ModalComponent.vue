@@ -1,5 +1,5 @@
 <template>
-  <div class="modal" @click.exact="close">
+  <div class="modal">
     <button @click="close">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -24,6 +24,7 @@
         <img
           :src="image.urls.regular"
           :style="{'width': width+'px', 'height': height + 'px' }"
+           @click="close"
           :alt="image.alt_description"
         />
       </div>
