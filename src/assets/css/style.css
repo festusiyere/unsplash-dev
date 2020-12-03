@@ -265,9 +265,11 @@ body {
 .fade-enter-active {
   transition: all 0.3s ease-out;
 }
+
 .fade-leave-active {
   transition: all 0.3s ease-out;
 }
+
 .fade-enter,
 .fade-leave-to {
   opacity: 0;
