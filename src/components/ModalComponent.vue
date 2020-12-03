@@ -29,9 +29,9 @@
         />
       </div>
       <div class="modal-text">
-        <div class="name">Jordan Okeke</div>
+        <div class="name">{{image.user.name}}</div>
 
-        <div class="location">Pretoria, South Africa</div>
+        <div class="location">{{image.user.location}}</div>
       </div>
     </div>
   </div>
