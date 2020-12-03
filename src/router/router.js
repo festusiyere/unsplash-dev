@@ -1,5 +1,5 @@
-import Home from "@/views/HomeComponent";
-import Search from "@/views/SearchResultComponent";
+import Home from "@/components/HomeComponent";
+import Search from "@/components/SearchResultComponent";
 
 export const routes = [
   { path: "", component: Home, name: "Home" },

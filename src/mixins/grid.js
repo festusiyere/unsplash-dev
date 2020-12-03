@@ -14,6 +14,7 @@ const grid = {
     },
     methods: {
         chunkArray(arr, size) {
+
             let result = new Array(size);
 
             let div = (arr.length / size) | 0;
@@ -39,12 +40,22 @@ const grid = {
 
             return result;
         },
+        setSize() {
+            if (window.matchMedia("only screen and (min-device-width: 768px) and (max-device-width: 1024px)").matches) {
+                this.size = 2
+            } else if (window.matchMedia("only screen and (min-device-width: 320px) and (max-device-width: 767px)").matches) {
+                this.size = 1
+            } else {
+                this.size = 3
+            }
+        }
     },
     created() {
-        console.log("I am working Fine");
+        window.addEventListener('resize', this.setSize);
+        this.setSize();
     },
     beforeDestroy() {
-        console.log("I am getting Destroyed");
+        window.removeEventListener('resize', this.setSize);
     }
 
 }

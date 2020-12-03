@@ -96,7 +96,7 @@ body {
 .second_section .images_container .inner_images {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 3.5vw;
+  gap: 3.2vw;
 }
 
 .inner_images .image {
@@ -215,9 +215,15 @@ body {
   background: none;
   border: none;
   color: var(--bg-grey-lighter);
+  cursor: pointer;
   position: absolute;
   right: 20px;
   top: 20px;
+  transition: .3s ease color;
+}
+
+.modal button:hover{
+  color: var(--bg-grey);
 }
 
 .modal .inner-modal {

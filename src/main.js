@@ -23,7 +23,6 @@ const router = new VueRouter({
 
 Vue.use(VueRouter);
 
-
 Vue.config.productionTip = false
 
 new Vue({

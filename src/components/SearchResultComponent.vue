@@ -39,7 +39,7 @@
 
 <script>
 import axios from "axios";
-import BaseComponent from "@/components/Base";
+import BaseComponent from "@/views/BaseComponent";
 import ModalComponent from "@/components/ModalComponent";
 import PlaceholderComponent from "@/components/PlaceholderComponent";
 import grid from "@/mixins/grid";
@@ -65,13 +65,6 @@ export default {
         .then(({ data }) => {
           this.images = data.results;
           this.status = "Search Results";
-          console.log(
-            data.results,
-            this.chunkArray(
-              this.images,
-              this.size
-            )
-          );
         })
         .catch((error) => console.log(error));
     },

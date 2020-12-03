@@ -24,7 +24,7 @@
         <img
           :src="image.urls.regular"
           :style="{'width': width+'px', 'height': height + 'px' }"
-           @click="close"
+          @click="close"
           :alt="image.alt_description"
         />
       </div>
@@ -55,10 +55,14 @@ export default {
       this.$emit("closeModal");
     },
     setSize(width, height) {
-      let factor = height / window.innerHeight;
-      this.width = width / (factor + 2);
-      this.height = height / (factor + 2);
-      console.log(height, width, factor);
+      if (window.innerHeight > window.innerWidth) {
+        let factor = width / window.innerWidth;
+        this.width = width / (factor + .5);
+      } else {
+        let factor = height / window.innerHeight;
+        this.width = width / (factor + 2);
+        this.height = height / (factor + 2);
+      }
     },
   },
   created() {

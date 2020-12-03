@@ -30,7 +30,7 @@
           <template v-if="images.length > 0">
             <div v-for="(items, index) in grid" :key="index">
               <div class="image" v-for="image in items" @click="setImage(image)" :key="image.id">
-                <img :src="image.urls.regular" :alt="image.alt_description" />
+                <img :src="image.urls.small" :alt="image.alt_description" />
                 <div class="text">
                   <div class="name">{{image.user.name}}</div>
                   <div class="location">{{image.user.location}}</div>
@@ -56,7 +56,7 @@
 
 <script>
 import axios from "axios";
-import BaseComponent from "@/components/Base";
+import BaseComponent from "@/views/BaseComponent";
 import ModalComponent from "@/components/ModalComponent";
 import PlaceholderComponent from "@/components/PlaceholderComponent";
 import grid from "@/mixins/grid";
@@ -78,16 +78,10 @@ export default {
   methods: {
     getPhotos() {
       axios
-        .get("/search/photos?page=1&query=african")
+        .get("/search/photos?page=2&per_page=8&query=african")
         .then(({ data }) => {
           this.images = data.results;
-          console.log(
-            data.results,
-            this.chunkArray(
-              this.images,
-              this.size
-            )
-          );
+          console.log(this.images)
         })
         .catch((error) => console.log(error));
     },
