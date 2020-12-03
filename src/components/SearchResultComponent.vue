@@ -38,12 +38,16 @@
 </template>
 
 <script>
+// Axios
 import axios from "axios";
+// Components
 import BaseComponent from "@/views/BaseComponent";
 import ModalComponent from "@/components/ModalComponent";
 import PlaceholderComponent from "@/components/PlaceholderComponent";
+// Mixins
 import grid from "@/mixins/grid";
 import modal from "@/mixins/modal";
+
 export default {
   mixins: [grid, modal],
   components: {
